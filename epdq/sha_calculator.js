@@ -14,7 +14,7 @@ var ShaCalculator = function(parameters, sha, shaType){
 }
 ShaCalculator.prototype.shaSignature = function(){
   if (this.sha == null || !this.sha.length){
-    throw "missing or empty sha parameter"
+    throw new Error("missing or empty sha parameter");
   }
   var buffer = '',
       sortedKeys = [];
