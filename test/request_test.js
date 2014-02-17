@@ -53,4 +53,19 @@ describe("Request", function(){
       new EPDQ.Request(options).requestUrl().should.equal(EPDQ.Request.LIVE_URL);
     });
   });
+
+  describe("with a custom account", function(){
+    it("should override the defaults", function(){
+      EPDQ.config.accounts = {
+        'test': {
+          testMode: true,
+          pspId: 'AnotherPSPID',
+          shaIn: 'ininin',
+          shaType: 'sha1'
+        }
+      };
+      var req = new EPDQ.Request({account: 'test', amount: 1500, currency: 'EUR', language: 'en_US', orderid: '1234'});
+      req.shaSign().should.equal("A724E81D5C7A3E915A671BB3220F2225000E11DC");
+    });
+  });
 });
